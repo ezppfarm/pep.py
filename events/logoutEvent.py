@@ -43,7 +43,7 @@ def handle(userToken, _=None, deleteToken=True):
 			glob.tokens.deleteToken(requestToken)
 		else:
 			userToken.kicked = True
-		query_for_db = "UPDATE users_stats SET current_status = '{}' WHERE username = '{}'".format(
+		query_for_db = "UPDATE users_stats SET current_status = `{}` WHERE username = `{}`".format(
 			"Offline",
 			username
 		)

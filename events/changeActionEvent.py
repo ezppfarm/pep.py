@@ -60,7 +60,7 @@ if userToken.matchID != -1 and userToken.actionID != actions.MULTIPLAYING and us
 		if userToken.relaxAnnounce == True:
 			userToken.relaxAnnounce = False
 			userToken.enqueue(serverPackets.notification("Hey, you've disabled relax. We've changed leaderboards back to normal now."))
-	query_for_db = "UPDATE users_stats SET current_status = '{}' WHERE username = '{}'".format(
+	query_for_db = "UPDATE users_stats SET current_status = `{}` WHERE username = `{}`".format(
 		userToken.actionText,
 		username
 	)
