@@ -43,11 +43,8 @@ def handle(userToken, _=None, deleteToken=True):
 			glob.tokens.deleteToken(requestToken)
 		else:
 			userToken.kicked = True
-		query_for_db = "UPDATE users_stats SET current_status = `{}` WHERE username = `{}`".format(
-			"Offline",
-			username
-		)
-		glob.db.execute(query_for_db)
+		
+		glob.db.execute("UPDATE users_stats SET current_status = %s WHERE username = %s", "Offline",	username)
 		# Change username if needed
 		newUsername = glob.redis.get("ripple:change_username_pending:{}".format(userID))
 		if newUsername is not None:
