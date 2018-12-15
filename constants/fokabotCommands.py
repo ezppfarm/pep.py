@@ -1293,7 +1293,7 @@ def editMap(fro, chan, message): # Edit maps ranking status ingame. // Added by 
 		else:
 			webhookDescription = "{} has been {}ed by {}".format(beatmapData["song_name"], rankType, name)
 	embed = Embed(
-		description=webhookDescription
+		description=webhookDescription,
 		color=0x1e0f3,
 	    timestamp=True
 	)
