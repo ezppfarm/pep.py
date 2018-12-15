@@ -1299,7 +1299,7 @@ def editMap(fro, chan, message): # Edit maps ranking status ingame. // Added by 
 		rank_type_footer = "loved"
 	else:
 		rank_type_footer = "{}d".format(rankType)
-	hook.set_author(name=name, icon_url="https://a.yozora.pw/" + userID)
+	hook.set_author(name=name, icon_url="https://a.yozora.pw/" + str(userID))
 	
 	hook.add_field(name="PP (95%)", value=str(beatmapData["pp_95"]) + "pp")
 	hook.add_field(name="PP (98%)", value=str(beatmapData["pp_98"]) + "pp")
