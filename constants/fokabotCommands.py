@@ -1307,7 +1307,7 @@ def editMap(fro, chan, message): # Edit maps ranking status ingame. // Added by 
 	embed.add_field(name="PP (99%)", str(beatmapData["pp_99"]) + "pp")
 	embed.add_field(name="PP (100%)", str(beatmapData["pp_100"]) + "pp")
 	embed.set_footer(text='{} on '.format(rank_type_footer))
-	embed.set_image("https://assets.ppy.sh/beatmaps/" + str(beatmapData["beatmapset_id"]) + "/covers/cover.jpg")Happened on ')
+	embed.set_image("https://assets.ppy.sh/beatmaps/" + str(beatmapData["beatmapset_id"]) + "/covers/cover.jpg")
 	
 
 	hook.send(embed)
