@@ -1295,17 +1295,13 @@ def editMap(fro, chan, message): # Edit maps ranking status ingame. // Added by 
 			webhookDescription = "{} has been {}ed by {}".format(beatmapData["song_name"], rankType, name)
 	hook = webhookHandler.Webhook(glob.conf.extra["ranked-webhook"], description=webhookDescription, color=0x1e0f3, timestamp=True)
 	
-	if rankType == "love":
-		rank_type_footer = "loved"
-	else:
-		rank_type_footer = "{}d".format(rankType)
 	hook.set_author(name=name, icon_url="https://a.yozora.pw/" + str(userID))
 	
 	hook.add_field(name="PP (95%)", value=str(beatmapData["pp_95"]) + "pp")
 	hook.add_field(name="PP (98%)", value=str(beatmapData["pp_98"]) + "pp")
 	hook.add_field(name="PP (99%)", value=str(beatmapData["pp_99"]) + "pp")
 	hook.add_field(name="PP (100%)", value=str(beatmapData["pp_100"]) + "pp")
-	hook.set_footer(text='{} on '.format(rank_type_footer))
+	hook.set_footer(text='Happened on ')
 	hook.set_image("https://assets.ppy.sh/beatmaps/" + str(beatmapData["beatmapset_id"]) + "/covers/cover.jpg")
 
 	hook.post()
