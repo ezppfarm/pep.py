@@ -1299,7 +1299,7 @@ def editMap(fro, chan, message): # Edit maps ranking status ingame. // Added by 
 		"title_url": "https://osu.ppy.sh/s/" + str(beatmapData["beatmapset_id"]),
 		"desc": webhookDescription,
 		"thumbnail": "https://assets.ppy.sh/beatmaps/" + str(beatmapData["beatmapset_id"]) + "/covers/cover.jpg",
-		"author": username,
+		"author": name,
 		"author_icon": "https://a.yozora.pw/" + str(userID),
 		"author_url": "https://yozora.pw/u/" + str(userID),
 	})
