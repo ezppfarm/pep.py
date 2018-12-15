@@ -39,7 +39,7 @@ from pubSubHandlers import banHandler
 from pubSubHandlers import notificationHandler
 from pubSubHandlers import updateSilenceHandler
 from pubSubHandlers import updateStatsHandler
-
+import json
 
 def make_app():
 	return tornado.web.Application([
@@ -69,6 +69,11 @@ if __name__ == "__main__":
 		# Read config.ini
 		consoleHelper.printNoNl("> Loading config file... ")
 		glob.conf = configHelper.config("config.ini")
+
+		# Read additional config file
+		consoleHelper.printNoNl("> Loading additional config file... ")
+		with open("config.json", "r") as f:
+			glob.conf.extra = json.load(f)
 
 		if glob.conf.default:
 			# We have generated a default config.ini, quit server

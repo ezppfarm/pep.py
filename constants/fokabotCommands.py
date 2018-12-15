@@ -21,6 +21,7 @@ from helpers import chatHelper as chat
 from common.web import cheesegull
 from helpers import countryHelper
 from helpers import consoleHelper
+from handlers import webhookHandler
 
 def bloodcatMessage(beatmapID):
 	beatmap = glob.db.fetch("SELECT song_name, beatmapset_id FROM beatmaps WHERE beatmap_id = %s LIMIT 1", [beatmapID])
@@ -1280,6 +1281,36 @@ def editMap(fro, chan, message): # Edit maps ranking status ingame. // Added by 
 			msg = "{} has {}ed beatmap: [https://osu.ppy.sh/s/{} {}]".format(name, rankType, mapID, beatmapData["song_name"])
 
 	chat.sendMessage("FokaBot", "#nowranked", msg)
+	hook = webhookHandler.Webhook(glob.conf.extra["ranked-webhook"])
+
+	if rankType == "love":
+		if mapType == "set":
+			webhookDescription = "{} (set) has been loved by {}".format(beatmapData["song_name"], name)
+		else:
+			webhookDescription = "{} has been loved by {}".format(beatmapData["song_name"], name)
+	else:
+		if mapType == "set":
+			webhookDescription = "{} (set) has been {}ed by {}".format(beatmapData["song_name"], rankType, name)
+		else:
+			webhookDescription = "{} has been {}ed by {}".format(beatmapData["song_name"], rankType, name)
+	embed = webhookHandler.Embed(
+		description=webhookDescription
+		color=0x1e0f3,
+	    timestamp=True
+	)
+	if rankType == "love":
+		rank_type_footer = "loved"
+	else:
+		rank_type_footer = "{}d".format(rankType)
+	embed.set_author(name=name, icon_url="https://a.yozora.pw/" + userID)
+	embed.add_field(name="PP (95%)", str(beatmapData["pp_95"]) + "pp")
+	embed.add_field(name="PP (98%)", str(beatmapData["pp_98"]) + "pp")
+	embed.add_field(name="PP (99%)", str(beatmapData["pp_99"]) + "pp")
+	embed.add_field(name="PP (100%)", str(beatmapData["pp_100"]) + "pp")
+	embed.set_footer(text='{} on '.format(rank_type_footer))
+	embed.set_image("https://assets.ppy.sh/beatmaps/" + str(beatmapData["beatmapset_id"]) + "/covers/cover.jpg")
+
+	hook.send(embed=embed)
 	return msg
 
 """
