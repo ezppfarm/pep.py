@@ -1293,7 +1293,7 @@ def editMap(fro, chan, message): # Edit maps ranking status ingame. // Added by 
 			webhookDescription = "{} (set) has been {}ed by {}".format(beatmapData["song_name"], rankType, name)
 		else:
 			webhookDescription = "{} has been {}ed by {}".format(beatmapData["song_name"], rankType, name)
-	hook = webhookHandler.Webhook(glob.conf.extra["ranked-webhook"], description=webhookDescription, color=0x1e0f3, timestamp=True)
+	hook = webhookHandler.Webhook(glob.conf.extra["ranked-webhook"], description=webhookDescription, color=0x1e0f3)
 	
 	hook.set_author(name=name, icon_url="https://a.yozora.pw/" + str(userID))
 	
