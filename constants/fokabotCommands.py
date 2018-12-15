@@ -1303,10 +1303,11 @@ def editMap(fro, chan, message): # Edit maps ranking status ingame. // Added by 
 	else:
 		rank_type_footer = "{}d".format(rankType)
 	embed.set_author(name=name, icon_url="https://a.yozora.pw/" + userID)
-	embed.add_field(name="PP (95%)", str(beatmapData["pp_95"]) + "pp")
-	embed.add_field(name="PP (98%)", str(beatmapData["pp_98"]) + "pp")
-	embed.add_field(name="PP (99%)", str(beatmapData["pp_99"]) + "pp")
-	embed.add_field(name="PP (100%)", str(beatmapData["pp_100"]) + "pp")
+	
+	embed.add_field(name="PP (95%)", value=str(beatmapData["pp_95"]) + "pp")
+	embed.add_field(name="PP (98%)", value=str(beatmapData["pp_98"]) + "pp")
+	embed.add_field(name="PP (99%)", value=str(beatmapData["pp_99"]) + "pp")
+	embed.add_field(name="PP (100%)", value=str(beatmapData["pp_100"]) + "pp")
 	embed.set_footer(text='{} on '.format(rank_type_footer))
 	embed.set_image("https://assets.ppy.sh/beatmaps/" + str(beatmapData["beatmapset_id"]) + "/covers/cover.jpg")
 
