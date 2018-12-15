@@ -46,22 +46,26 @@ if userToken.matchID != -1 and userToken.actionID != actions.MULTIPLAYING and us
 	userToken.actionMods = packetData["actionMods"]
 	userToken.beatmapID = packetData["beatmapID"]
 
+	
 	if bool(packetData["actionMods"] & 128) == True:
 		userToken.relaxing = True
-		userToken.actionText = packetData["actionText"] + " with Relax"
+		UserText = packetData["actionText"] + " with Relax"
+		userToken.actionText = UserText
 		userToken.updateCachedStats()
 		if userToken.relaxAnnounce == False:
 			userToken.relaxAnnounce = True
 			userToken.enqueue(serverPackets.notification("Hey, you're playing with relax, we've changed the leaderboards to relax ones now!"))
 	else:
-		userToken.actionText = packetData["actionText"]
+		UserText = packetData["actionText"]
+		userToken.actionText = UserText
 		userToken.relaxing = False
 		userToken.updateCachedStats()
 		if userToken.relaxAnnounce == True:
 			userToken.relaxAnnounce = False
 			userToken.enqueue(serverPackets.notification("Hey, you've disabled relax. We've changed leaderboards back to normal now."))
-
-	glob.db.execute("UPDATE users_stats SET current_status = `{}` WHERE id = {}".format(userToken.actionText, userID))
+	stats_updater_query = "UPDATE users_stats SET current_status = `{}` WHERE id = {}".format(UserText, userID)
+	log.info(stats_updater_query)
+	glob.db.execute(stats_updater_query)
 	# Enqueue our new user panel and stats to us and our spectators
 	recipients = [userToken]
 	if len(userToken.spectators) > 0:
