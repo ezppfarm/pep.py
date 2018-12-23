@@ -1347,7 +1347,11 @@ commands = [
 	}, {
 		"trigger": "!help",
 		"response": "Click (here)[https://ripple.moe/index.php?p=16&id=4] for FokaBot's full command list"
-	}, #{
+	}, {
+		"triggler": "!advertise",
+		"response": advertise
+	},
+	 #{
 		#"trigger": "!ask",
 		#"syntax": "<question>",
 		#"callback": ask
