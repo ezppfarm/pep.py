@@ -130,8 +130,24 @@ def changeLocation(fro, chan, message):
 			theUser.country = countryHelper.getCountryID(location)
 			return "Your country has been changed"
 		else:
-			return "Bad luck, you're not a donatior, therefore you can't do that."
+			return "Bad luck, you're not a donator, therefore you can't do that."
 
+def advertise(fro, chan, message):
+	type_of_advertisement = message[0].upper()
+	if type_of_advertisement == "TWITCH":
+		twitch_url = glob.db.query("SELECT * FROM users_stats WHERE id = ?", fro)
+		message = "Hey everyone! "+ userUtils.getUsername(fro) +" has went live! Check them out here: " + twitch_url["twitch_url"]
+		params = urlencode("k": glob.conf.config["server"]["cikey"], "to": "#announce", "msg": message)
+		requests.get("https://c.yozora.pw/fokaBotMessage?{}".format(params))
+		return "name jeff"
+	elif type_of_advertisement == "YOUTUBE":
+		yt = glob.db.query("SELECT * FROM users_stats WHERE id = ?", fro)
+		message = "Hey everyone! "+ userUtils.getUsername(fro) +" has went live or uploaded a new video! Check them out here: " + twitch_url["youtube"]
+		params = urlencode("k": glob.conf.config["server"]["cikey"], "to": "#announce", "msg": message)
+		requests.get("https://c.yozora.pw/fokaBotMessage?{}".format(params))
+		return "ok_hand"
+	else:
+		return "Bad luck, you're not a donator, you can't do that"
 def kickAll(fro, chan, message):
 	# Kick everyone but mods/admins
 	toKick = []
