@@ -140,7 +140,7 @@ def advertise(fro, chan, message):
 	if type_of_advertisement == "TWITCH":
 		twitch_url = glob.db.query("SELECT * FROM users_stats WHERE id = ?", fro)
 		message = "Hey everyone! "+ userUtils.getUsername(fro) +" has went live! Check them out here: " + twitch_url["twitch_url"]
-		params = urlencode("k": glob.conf.config["server"]["cikey"], "to": "#announce", "msg": message)
+		params = urlencode({"k": glob.conf.config["server"]["cikey"], "to": "#announce", "msg": message})
 		requests.get("https://c.yozora.pw/fokaBotMessage?{}".format(params))
 		return "name jeff"
 	elif type_of_advertisement == "YOUTUBE":
