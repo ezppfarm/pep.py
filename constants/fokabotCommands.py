@@ -132,25 +132,6 @@ def changeLocation(fro, chan, message):
 		else:
 			return "Bad luck, you're not a donator, therefore you can't do that."
 
-def advertise(fro, chan, message):
-	type_of_advertisement = message[0].upper()
-	theUser = glob.tokens.getTokenFromUsername(userUtils.safeUsername(fro), safe=True)
-	if bool(theUser.privileges & privileges.USER_DONOR) == False:
-		return "You are not a donator, you can't do that."
-	if type_of_advertisement == "TWITCH":
-		twitch_url = glob.db.query("SELECT * FROM users_stats WHERE id = ?", fro)
-		message = "Hey everyone! "+ userUtils.getUsername(fro) +" has went live! Check them out here: " + twitch_url["twitch_url"]
-		params = urlencode({"k": glob.conf.config["server"]["cikey"], "to": "#announce", "msg": message})
-		requests.get("https://c.yozora.pw/fokaBotMessage?{}".format(params))
-		return "name jeff"
-	elif type_of_advertisement == "YOUTUBE":
-		yt = glob.db.query("SELECT * FROM users_stats WHERE id = ?", fro)
-		message = "Hey everyone! "+ userUtils.getUsername(fro) +" has went live or uploaded a new video! Check them out here: " + twitch_url["youtube"]
-		params = urlencode({"k": glob.conf.config["server"]["cikey"], "to": "#announce", "msg": message}	)
-		requests.get("https://c.yozora.pw/fokaBotMessage?{}".format(params))
-		return "ok_hand"
-	else:
-		return "invalid"
 def kickAll(fro, chan, message):
 	# Kick everyone but mods/admins
 	toKick = []
@@ -1347,9 +1328,6 @@ commands = [
 	}, {
 		"trigger": "!help",
 		"response": "Click (here)[https://ripple.moe/index.php?p=16&id=4] for FokaBot's full command list"
-	}, {
-		"triggler": "!advertise",
-		"response": advertise
 	},
 	 #{
 		#"trigger": "!ask",

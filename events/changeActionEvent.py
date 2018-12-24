@@ -55,6 +55,14 @@ if userToken.matchID != -1 and userToken.actionID != actions.MULTIPLAYING and us
 		if userToken.relaxAnnounce == False:
 			userToken.relaxAnnounce = True
 			userToken.enqueue(serverPackets.notification("Hey, you're playing with relax, we've changed the leaderboards to relax ones now!"))
+	elif bool(packetData["actionMods"] & 8192) == True:
+		userToken.autobotting = True
+		UserText = packetData["actionText"] + " with Auto"
+		userToken.actionText = UserText
+		userToken.updateCachedStats()
+		if userToken.apAnnounce == False:
+			userToken.apAnnounce = True
+			userToken.enqueue(serverPackets.notification("Hey, you're playing with relax, we've changed the leaderboards to the AP ones now!"))
 	else:
 		UserText = packetData["actionText"]
 		userToken.actionText = UserText

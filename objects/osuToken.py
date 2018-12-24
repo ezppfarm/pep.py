@@ -82,6 +82,8 @@ class token:
 		self.relaxing = False
 		self.relaxAnnounce = False
 		
+		self.autobotting = False
+		self.apAnnounce = False
 		# Generate/set token
 		if token_ is not None:
 			self.token = token_
@@ -448,6 +450,7 @@ class token:
 		"""
 		stats = userUtils.getUserStats(self.userID, self.gameMode)
 		stats_relax = userUtils.getUserStatsRx(self.userID, self.gameMode)
+		stats_auto = userUtils.getUserStatsAp(self.userID, self.gameMode)
 		log.debug(str(stats))
 		if stats is None:
 			log.warning("Stats query returned None")
@@ -459,6 +462,9 @@ class token:
 		if self.relaxing == True:
 			self.gameRank = stats_relax["gameRank"]
 			self.pp = stats_relax["pp"]
+		elif self.autobotting == True:
+			self.gameRank = stats_auto["gameRank"]
+			self.pp = stats_auto["pp"]
 		else:
 			self.gameRank = stats["gameRank"]
 			self.pp = stats["pp"]
