@@ -67,9 +67,12 @@ if userToken.matchID != -1 and userToken.actionID != actions.MULTIPLAYING and us
 		UserText = packetData["actionText"]
 		userToken.actionText = UserText
 		userToken.relaxing = False
+		userToken.autobotting = False
 		userToken.updateCachedStats()
 		if userToken.relaxAnnounce == True:
 			userToken.relaxAnnounce = False
+		elif userToken.apAnnounce == True
+			userToken.apAnnounce = False
 			userToken.enqueue(serverPackets.notification("Hey, you've disabled relax/autopilot. We've changed leaderboards back to normal now."))
 	glob.db.execute("UPDATE users_stats SET current_status = %s WHERE id = %s", [UserText, userID])
 	# Enqueue our new user panel and stats to us and our spectators
