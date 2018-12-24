@@ -52,6 +52,10 @@ if userToken.matchID != -1 and userToken.actionID != actions.MULTIPLAYING and us
 		UserText = packetData["actionText"] + " with Relax"
 		userToken.actionText = UserText
 		userToken.updateCachedStats()
+		if userToken.apAnnounce == True:
+			userToken.apAnnounce = False
+		if userToken.autobotting == True:
+			userToken.autobotting = False
 		if userToken.relaxAnnounce == False:
 			userToken.relaxAnnounce = True
 			userToken.enqueue(serverPackets.notification("Hey, you're playing with relax, we've changed the leaderboards to relax ones now!"))
@@ -59,6 +63,10 @@ if userToken.matchID != -1 and userToken.actionID != actions.MULTIPLAYING and us
 		userToken.autobotting = True
 		UserText = packetData["actionText"] + " with Auto"
 		userToken.actionText = UserText
+		if userToken.relaxAnnounce == True:
+			userToken.relaxAnnounce = False
+		if userToken.relaxing == True:
+			userToken.relaxing = False
 		userToken.updateCachedStats()
 		if userToken.apAnnounce == False:
 			userToken.apAnnounce = True
