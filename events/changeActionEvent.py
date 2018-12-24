@@ -62,7 +62,7 @@ if userToken.matchID != -1 and userToken.actionID != actions.MULTIPLAYING and us
 		userToken.updateCachedStats()
 		if userToken.apAnnounce == False:
 			userToken.apAnnounce = True
-			userToken.enqueue(serverPackets.notification("Hey, you're playing with relax, we've changed the leaderboards to the AP ones now!"))
+			userToken.enqueue(serverPackets.notification("Hey, you're playing with autopilot, we've changed the leaderboards to the AP ones now!"))
 	else:
 		UserText = packetData["actionText"]
 		userToken.actionText = UserText
@@ -70,7 +70,7 @@ if userToken.matchID != -1 and userToken.actionID != actions.MULTIPLAYING and us
 		userToken.updateCachedStats()
 		if userToken.relaxAnnounce == True:
 			userToken.relaxAnnounce = False
-			userToken.enqueue(serverPackets.notification("Hey, you've disabled relax. We've changed leaderboards back to normal now."))
+			userToken.enqueue(serverPackets.notification("Hey, you've disabled relax/autopilot. We've changed leaderboards back to normal now."))
 	glob.db.execute("UPDATE users_stats SET current_status = %s WHERE id = %s", [UserText, userID])
 	# Enqueue our new user panel and stats to us and our spectators
 	recipients = [userToken]
