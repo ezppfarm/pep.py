@@ -192,8 +192,8 @@ def handle(tornadoRequest):
 				if not token.restricted:
 					responseToken.enqueue(serverPackets.userPanel(token.userID))
 
-		# Get location and country from ip.zxq.co or database
-		if glob.localize:
+		# Get location and country from ip.zxq.co, else we get it from the db if they are a donor.
+		if glob.localize and (firstLogin == True or responseToken.privileges & privileges.USER_DONOR <= 0):
 			# Get location and country from IP
 			latitude, longitude = locationHelper.getLocation(requestIP)
 			countryLetters = locationHelper.getCountry(requestIP)
