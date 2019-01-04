@@ -197,7 +197,6 @@ def handle(tornadoRequest):
 		if responseToken.restricted:
 			responseData += serverPackets.notification("I love you, <3.")
 			responseData += serverPackets.userSupporterGMT(userSupporter, userGMT, userTournament)
-			responseData += serverPackets.userSupporterGMT(userSupporter, userGMT)
 		
 			responseData += serverPackets.crashClient()
 
