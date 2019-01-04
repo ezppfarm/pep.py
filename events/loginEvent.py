@@ -433,8 +433,6 @@ def handle(tornadoRequest):
 			responseData += serverPackets.userSupporterGMT(userSupporter, userGMT)
 			
 			responseData += serverPackets.crashClient()
-
-		
 	except exceptions.loginLockedException:
 		# Login banned error packet
 		responseData += serverPackets.loginLocked()
