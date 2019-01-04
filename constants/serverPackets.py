@@ -33,6 +33,8 @@ def needSupporter():
 def needVerification():
 	return packetHelper.buildPacket(packetIDs.server_userID, [[-8, dataTypes.SINT32]])
 
+def crashClient():
+	return packetHelper.buildPacket(packetIDs.server_ping, [[-1, dataTypes.SINT32]])
 
 """ Login packets """
 def userID(uid):
