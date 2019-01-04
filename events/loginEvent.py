@@ -130,10 +130,8 @@ def handle(tornadoRequest):
 
 		# Get supporter/GMT
 		userGMT = False
-		with glob.tokens:
-			for _, token in glob.tokens.tokens.items():
-				if not token.restricted:
-					userSupporter = True
+		if not responseToken.restricted:
+			userSupporter = True
 		userTournament = False
 		if responseToken.admin:
 			userGMT = True
