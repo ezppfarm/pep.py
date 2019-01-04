@@ -1282,27 +1282,6 @@ def editMap(fro, chan, message): # Edit maps ranking status ingame. // Added by 
 
 	chat.sendMessage("FokaBot", "#nowranked", msg)
 
-	if rankType == "love":
-		if mapType == "set":
-			webhookDescription = "{} (set) has been loved by {}".format(beatmapData["song_name"], name)
-		else:
-			webhookDescription = "{} has been loved by {}".format(beatmapData["song_name"], name)
-	else:
-		if mapType == "set":
-			webhookDescription = "{} (set) has been {}ed by {}".format(beatmapData["song_name"], rankType, name)
-		else:
-			webhookDescription = "{} has been {}ed by {}".format(beatmapData["song_name"], rankType, name)
-
-	webhookHelper.postWebhook(glob.conf.extra["ranked-webhook"], args={
-		"color": 0xf0ad4e,
-		"title": "New Ranked Map!",
-		"title_url": "https://osu.ppy.sh/s/" + str(beatmapData["beatmapset_id"]),
-		"desc": webhookDescription,
-		"image": "https://assets.ppy.sh/beatmaps/" + str(beatmapData["beatmapset_id"]) + "/covers/cover.jpg",
-		"author": name,
-		"author_icon": "https://a.yozora.pw/" + str(userID),
-		"author_url": "https://yozora.pw/u/" + str(userID),
-	})
 	return msg
 
 """
