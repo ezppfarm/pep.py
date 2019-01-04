@@ -130,8 +130,8 @@ def handle(tornadoRequest):
 
 		# Get supporter/GMT
 		userGMT = False
-		if not responseToken.restricted:
-			userSupporter = True
+
+		userSupporter = True
 		userTournament = False
 		if responseToken.admin:
 			userGMT = True
@@ -160,7 +160,8 @@ def handle(tornadoRequest):
 		responseToken.enqueue(serverPackets.silenceEndTime(silenceSeconds))
 		responseToken.enqueue(serverPackets.userID(userID))
 		responseToken.enqueue(serverPackets.protocolVersion())
-		responseToken.enqueue(serverPackets.userSupporterGMT(userSupporter, userGMT, userTournament))
+		if not responseToken.restricted:
+			responseToken.enqueue(serverPackets.userSupporterGMT(userSupporter, userGMT, userTournament))
 		responseToken.enqueue(serverPackets.userPanel(userID, True))
 		responseToken.enqueue(serverPackets.userStats(userID, True))
 
