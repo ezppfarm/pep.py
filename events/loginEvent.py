@@ -225,9 +225,7 @@ def handle(tornadoRequest):
 
 		# Set reponse data to right value and reset our queue
 		responseData = responseToken.queue
-		if glob.verifiedCache[str(userID)] == 0:
-			responseData += serverPackets.notification("Goodbye idiot.")
-			responseData += serverPackets.crashClient()
+
 		responseToken.resetQueue()
 	except exceptions.loginFailedException:
 		# Login failed error packet
