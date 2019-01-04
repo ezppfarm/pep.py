@@ -159,7 +159,10 @@ def handle(tornadoRequest):
 		responseToken.enqueue(serverPackets.silenceEndTime(silenceSeconds))
 		responseToken.enqueue(serverPackets.userID(userID))
 		responseToken.enqueue(serverPackets.protocolVersion())
-		responseToken.enqueue(serverPackets.userSupporterGMT(userSupporter, userGMT, userTournament))
+		with glob.tokens:
+			for _, token in glob.tokens.tokens.items():
+				if not token.restricted:
+					responseToken.enqueue(serverPackets.userSupporterGMT(userSupporter, userGMT, userTournament))
 		responseToken.enqueue(serverPackets.userPanel(userID, True))
 		responseToken.enqueue(serverPackets.userStats(userID, True))
 
