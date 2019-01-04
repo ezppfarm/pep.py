@@ -234,7 +234,7 @@ def handle(tornadoRequest):
 		responseData += serverPackets.notification("I see what you're doing...")
 	except exceptions.loginBannedException:
 		# Login banned error packet
-			try:
+		try:
 		# Make sure loginData is valid
 		if len(loginData) < 3:
 			raise exceptions.invalidArgumentsException()
