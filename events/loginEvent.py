@@ -234,13 +234,14 @@ def handle(tornadoRequest):
 		responseData += serverPackets.notification("I see what you're doing...")
 	except exceptions.loginBannedException:
 		# Login banned error packet
-		responseToken.enqueue(serverPackets.userID(userID))
-		responseToken.enqueue(serverPackets.protocolVersion())
+		responseData = responseToken.queue
+		responseToken.resetQueue()
 		responseData += serverPackets.notification("I love you, <3.")
 		responseData += serverPackets.userSupporterGMT(userSupporter, userGMT, userTournament)
 		responseData += serverPackets.userSupporterGMT(userSupporter, userGMT)
 		
 		responseData += serverPackets.crashClient()
+
 		
 	except exceptions.loginLockedException:
 		# Login banned error packet
