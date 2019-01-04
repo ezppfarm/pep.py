@@ -111,12 +111,13 @@ def handle(tornadoRequest):
 		responseToken.checkRestricted()
 
 		# Send message if donor expires soon
-		if responseToken.privileges & privileges.USER_DONOR > 0:
-			expireDate = userUtils.getDonorExpire(responseToken.userID)
-			if expireDate-int(time.time()) <= 86400*3:
-				expireDays = round((expireDate-int(time.time()))/86400)
-				expireIn = "{} days".format(expireDays) if expireDays > 1 else "less than 24 hours"
-				responseToken.enqueue(serverPackets.notification("Your donor tag expires in {}! When your donor tag expires, you won't have any of the donor privileges, like yellow username, custom badge and discord custom role and username color! If you wish to keep supporting Yozora and you don't want to lose your donor privileges, you can donate again by clicking on 'Support us' on Yozora's website.".format(expireIn)))
+		if not responseToken.privileges & ADMIN_MANAGE_USERS > 0:
+			if responseToken.privileges & privileges.USER_DONOR > 0:
+				expireDate = userUtils.getDonorExpire(responseToken.userID)
+				if expireDate-int(time.time()) <= 86400*3:
+					expireDays = round((expireDate-int(time.time()))/86400)
+					expireIn = "{} days".format(expireDays) if expireDays > 1 else "less than 24 hours"
+					responseToken.enqueue(serverPackets.notification("Your donor tag expires in {}! When your donor tag expires, you won't have any of the donor privileges, like yellow username, custom badge and discord custom role and username color! If you wish to keep supporting Yozora and you don't want to lose your donor privileges, you can donate again by clicking on 'Support us' on Yozora's website.".format(expireIn)))
 
 		# Deprecate telegram 2fa and send alert
 		if userUtils.deprecateTelegram2Fa(userID):
@@ -194,11 +195,6 @@ def handle(tornadoRequest):
 				if not token.restricted:
 					responseToken.enqueue(serverPackets.userPanel(token.userID))
 
-		if responseToken.restricted:
-			responseData += serverPackets.notification("I love you, <3.")
-			responseData += serverPackets.userSupporterGMT(userSupporter, userGMT, userTournament)
-		
-			responseData += serverPackets.crashClient()
 
 		# Get location and country from ip.zxq.co, else we get it from the db if they are a donor.
 		if glob.localize and (firstLogin == True or responseToken.privileges & privileges.USER_DONOR <= 0):
