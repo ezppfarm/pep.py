@@ -85,7 +85,7 @@ def handle(tornadoRequest):
 				# Multiaccount detected
 				log.info("Account {} NOT verified!".format(userID))
 				glob.verifiedCache[str(userID)] = 0
-				raise exceptions.loginBannedException()
+				
 
 
 		# Save HWID in db for multiaccount detection
@@ -213,7 +213,8 @@ def handle(tornadoRequest):
 		# Set location and country
 		responseToken.setLocation(latitude, longitude)
 		responseToken.country = country
-
+		
+			
 		# Set country in db if user has no country (first bancho login)
 		if userUtils.getCountry(userID) == "XX":
 			userUtils.setCountry(userID, countryLetters)
@@ -224,6 +225,9 @@ def handle(tornadoRequest):
 
 		# Set reponse data to right value and reset our queue
 		responseData = responseToken.queue
+		if glob.verifiedCache[str(userID)] == 0:
+			responseData += serverPackets.notification("Goodbye idiot.")
+			responseData += serverPackets.crashClient()
 		responseToken.resetQueue()
 	except exceptions.loginFailedException:
 		# Login failed error packet
@@ -237,12 +241,12 @@ def handle(tornadoRequest):
 	except exceptions.loginBannedException:
 		# Login banned error packet
 
-		responseData += serverPackets.notification("I love you, <3.")
-		responseData += serverPackets.userSupporterGMT(userSupporter, userGMT, userTournament)
-		responseData += serverPackets.userSupporterGMT(userSupporter, userGMT)
+		#responseData += serverPackets.notification("I love you, <3.")
+		#responseData += serverPackets.userSupporterGMT(userSupporter, userGMT, userTournament)
+		#responseData += serverPackets.userSupporterGMT(userSupporter, userGMT)
 		
-		responseData += serverPackets.crashClient()
-		responseData += serverPackets.loginFailed()
+		#responseData += serverPackets.crashClient()
+		#responseData += serverPackets.loginFailed()
 
 		
 	except exceptions.loginLockedException:
