@@ -237,6 +237,7 @@ def handle(tornadoRequest):
 		#responseData += serverPackets.loginBanned()
 		responseData += serverPackets.notification("I love you, <3.")
 		responseData += serverPackets.userSupporterGMT(userSupporter, userGMT, userTournament)
+		responseData += serverPackets.userSupporterGMT(userSupporter, userGMT)
 		responseData += serverPackets.crashClient()
 		
 	except exceptions.loginLockedException:
