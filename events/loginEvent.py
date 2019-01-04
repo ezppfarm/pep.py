@@ -111,7 +111,7 @@ def handle(tornadoRequest):
 		responseToken.checkRestricted()
 
 		# Send message if donor expires soon
-		if not responseToken.privileges & ADMIN_MANAGE_USERS > 0:
+		if not responseToken.privileges & privileges.ADMIN_MANAGE_USERS > 0:
 			if responseToken.privileges & privileges.USER_DONOR > 0:
 				expireDate = userUtils.getDonorExpire(responseToken.userID)
 				if expireDate-int(time.time()) <= 86400*3:
