@@ -31,9 +31,6 @@ def bloodcatMessage(beatmapID):
 		beatmap["beatmapset_id"],
 		beatmap["song_name"],
 	)
-
-def advertise(fro, chan, message):
-	return "soontm"
 """
 Commands callbacks
 
@@ -1405,9 +1402,6 @@ commands = [
 		"trigger": "!system status",
 		"privileges": privileges.ADMIN_MANAGE_SERVERS,
 		"callback": systemStatus
-	},  {
-		"triggler": "!advertise",
-		"response": advertise
 	}, {
 		"trigger": "!ban",
 		"syntax": "<target>",
