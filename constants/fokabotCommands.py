@@ -39,13 +39,13 @@ def advertise(fro, chan, message):
 		return "You are not a donator, you can't do that."
 	if type_of_advertisement == "TWITCH":
 		twitch_url = glob.db.query("SELECT * FROM users_stats WHERE id = ?", fro)
-		message = "Hey everyone! "+ userUtils.getUsername(fro) +" has went live! Check them out here: " + twitch_url["twitch_url"]
-		chat.sendMessage("FokaBot", "#announce", message)
+		msg = "Hey everyone! "+ userUtils.getUsername(fro) +" has went live! Check them out here: " + twitch_url["twitch_url"]
+		chat.sendMessage("FokaBot", "#announce", msg)
 		return "name jeff"
 	elif type_of_advertisement == "YOUTUBE":
 		yt = glob.db.query("SELECT * FROM users_stats WHERE id = ?", fro)
-		message = "Hey everyone! "+ userUtils.getUsername(fro) +" has went live or uploaded a new video! Check them out here: " + twitch_url["youtube"]
-		chat.sendMessage("FokaBot", "#announce", message)
+		msg = "Hey everyone! "+ userUtils.getUsername(fro) +" has went live or uploaded a new video! Check them out here: " + twitch_url["youtube"]
+		chat.sendMessage("FokaBot", "#announce", msg)
 		return "Posted"
 	else:
 		return "invalid"
