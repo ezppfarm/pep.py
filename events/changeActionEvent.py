@@ -49,7 +49,7 @@ if userToken.matchID != -1 and userToken.actionID != actions.MULTIPLAYING and us
 	
 	if bool(packetData["actionMods"] & 128) == True:
 		userToken.relaxing = True
-		UserText = packetData["actionText"] + " with Relax"
+		UserText = packetData["actionText"] + " Playing Relax"
 		userToken.actionText = UserText
 		userToken.updateCachedStats()
 		if userToken.apAnnounce == True:
@@ -58,10 +58,10 @@ if userToken.matchID != -1 and userToken.actionID != actions.MULTIPLAYING and us
 			userToken.autobotting = False
 		if userToken.relaxAnnounce == False:
 			userToken.relaxAnnounce = True
-			userToken.enqueue(serverPackets.notification("Hey, you're playing with relax, we've changed the leaderboards to relax ones now!"))
+			userToken.enqueue(serverPackets.notification("Hey, you're playing with Relax, we've changed the leaderboards to Relax."))
 	elif bool(packetData["actionMods"] & 8192) == True:
 		userToken.autobotting = True
-		UserText = packetData["actionText"] + " with Auto"
+		UserText = packetData["actionText"] + " Playing AutoPilot"
 		userToken.actionText = UserText
 		if userToken.relaxAnnounce == True:
 			userToken.relaxAnnounce = False
@@ -70,7 +70,7 @@ if userToken.matchID != -1 and userToken.actionID != actions.MULTIPLAYING and us
 		userToken.updateCachedStats()
 		if userToken.apAnnounce == False:
 			userToken.apAnnounce = True
-			userToken.enqueue(serverPackets.notification("Hey, you're playing with autopilot, we've changed the leaderboards to the AP ones now!"))
+			userToken.enqueue(serverPackets.notification("Hey, you're playing with AutoPilot, We've chaned the learboards to AutoPilot."))
 	else:
 		UserText = packetData["actionText"]
 		userToken.actionText = UserText
@@ -81,7 +81,7 @@ if userToken.matchID != -1 and userToken.actionID != actions.MULTIPLAYING and us
 			userToken.relaxAnnounce = False
 		elif userToken.apAnnounce == True:
 			userToken.apAnnounce = False
-			userToken.enqueue(serverPackets.notification("Hey, you've disabled relax/autopilot. We've changed leaderboards back to normal now."))
+			userToken.enqueue(serverPackets.notification("Hey, you've disabled relax/autopilot. We've changed back to the Regular leaderboards."))
 	glob.db.execute("UPDATE users_stats SET current_status = %s WHERE id = %s", [UserText, userID])
 	# Enqueue our new user panel and stats to us and our spectators
 	recipients = [userToken]

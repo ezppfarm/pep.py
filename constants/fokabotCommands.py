@@ -1379,7 +1379,7 @@ commands = [
 		"privileges": privileges.ADMIN_SILENCE_USERS,
 		"callback": silence
 	}, {
-		"trigger": "!removesilence",
+		"trigger": "!unsilence",
 		"syntax": "<target>",
 		"privileges": privileges.ADMIN_SILENCE_USERS,
 		"callback": removeSilence
