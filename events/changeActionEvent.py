@@ -70,7 +70,7 @@ if userToken.matchID != -1 and userToken.actionID != actions.MULTIPLAYING and us
 		userToken.updateCachedStats()
 		if userToken.apAnnounce == False:
 			userToken.apAnnounce = True
-			userToken.enqueue(serverPackets.notification("Hey, you're playing with AutoPilot, We've chaned the learboards to AutoPilot."))
+			userToken.enqueue(serverPackets.notification("Hey, you're playing with AutoPilot, We've chaned the leaderboards to AutoPilot."))
 	else:
 		UserText = packetData["actionText"]
 		userToken.actionText = UserText
