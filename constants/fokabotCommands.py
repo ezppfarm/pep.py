@@ -31,7 +31,6 @@ def bloodcatMessage(beatmapID):
 		beatmap["beatmapset_id"],
 		beatmap["song_name"],
 	)
-
 """
 Commands callbacks
 

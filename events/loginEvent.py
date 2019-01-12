@@ -225,9 +225,7 @@ def handle(tornadoRequest):
 
 		# Set reponse data to right value and reset our queue
 		responseData = responseToken.queue
-		if glob.verifiedCache[str(userID)] == 0:
-			responseData += serverPackets.notification("Goodbye idiot.")
-			responseData += serverPackets.crashClient()
+
 		responseToken.resetQueue()
 	except exceptions.loginFailedException:
 		# Login failed error packet
@@ -239,15 +237,7 @@ def handle(tornadoRequest):
 		
 		responseData += serverPackets.notification("I see what you're doing...")
 	except exceptions.loginBannedException:
-		# Login banned error packet
-
-		#responseData += serverPackets.notification("I love you, <3.")
-		#responseData += serverPackets.userSupporterGMT(userSupporter, userGMT, userTournament)
-		#responseData += serverPackets.userSupporterGMT(userSupporter, userGMT)
-		
-		#responseData += serverPackets.crashClient()
-		#responseData += serverPackets.loginFailed()
-		print("lol")
+		responseData += serverPackets.loginBanned()
 		
 	except exceptions.loginLockedException:
 		# Login banned error packet
