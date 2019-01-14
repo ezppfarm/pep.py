@@ -259,12 +259,11 @@ def ban(fro, chan, message):
 	userID = userUtils.getID(fro)
 	if not targetUserID:
 		return "{}: user not found".format(target)
-
-	# Set allowed to 0
-	userUtils.ban(targetUserID)
-	
 	if targetUserID in immuneUsers:
 		return "Nope."
+	# Set allowed to 0
+	userUtils.ban(targetUserID)	
+	
 	# Send ban packet to the user if he's online
 	targetToken = glob.tokens.getTokenFromUsername(userUtils.safeUsername(target), safe=True)
 	if targetToken is not None:
