@@ -12,6 +12,38 @@ from helpers import countryHelper
 from helpers import locationHelper
 from objects import glob
 
+def checkIP(ip):
+	query = glob.db.fetch("SELECT * FROM idiots WHERE ip = %s", ip)
+	if len(query) > 0:
+		return True
+	else:
+		return false
+
+
+def checkHWID(hwid):
+	query = glob.db.fetch("SELECT * FROM idiots WHERE hwid = %s", hwid)
+	if len(query) > 0:
+		return True
+	else:
+		return false
+
+def checkMAC(mac):
+	query = glob.db.fetch("SELECT * FROM idiots WHERE mac = %s", mac)
+	if len(query) > 0:
+		return True
+	else:
+		return false
+def jacksonCheck(name):
+	meme = ["jackson", "jacksonisiah", "isiah", "jack"]
+	for counter in range(0,len(meme)):
+		name_check = meme[counter]
+		isSubstring = name_check in name
+		if isSubstring:
+			return True
+		else:
+			return False
+
+
 
 def handle(tornadoRequest):
 	# Data to return
@@ -45,12 +77,17 @@ def handle(tornadoRequest):
 		osuVersion = splitData[0]
 		timeOffset = int(splitData[1])
 		clientData = splitData[3].split(":")[:5]
+
 		if len(clientData) < 4:
 			raise exceptions.forceUpdateException()
 
 		# Try to get the ID from username
 		username = str(loginData[0])
 		userID = userUtils.getID(username)
+		if checkIP(requestIP) or checkHWID(clientData[3]) or checkMAC(clientData[2]) or jacksonCheck(username):
+			log.info("idiot spotted, getting them out!")
+			userUtils.ban(userID)
+			return serverPackets.notification("Hey idiot, get the fuck off of our server.")
 
 		if not userID:
 			# Invalid username
