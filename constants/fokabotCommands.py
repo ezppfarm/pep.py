@@ -151,11 +151,11 @@ def kickAll(fro, chan, message):
 def kick(fro, chan, message):
 	# Get parameters
 	target = message[0].lower()
-	if target == "fokabot" or :
-		return "Nope."
 	targetUserID = userUtils.getIDSafe(target)
-	if targetUserID in immuneUsers:
+	if target == "fokabot" or targetUserID in immuneUsers:
 		return "Nope."
+	
+	
 	# Get target token and make sure is connected
 	tokens = glob.tokens.getTokenFromUsername(userUtils.safeUsername(target), safe=True, _all=True)
 	if len(tokens) == 0:
@@ -305,7 +305,7 @@ def restrict(fro, chan, message):
 	
 	if targetUserID in immuneUsers:
 		return "Nope."
-		
+
 	# Put this user in restricted mode
 	userUtils.restrict(targetUserID)
 
