@@ -23,6 +23,8 @@ from helpers import countryHelper
 from helpers import consoleHelper
 from helpers import webhookHelper
 
+immuneUsers = [1000, 1193]
+
 def bloodcatMessage(beatmapID):
 	beatmap = glob.db.fetch("SELECT song_name, beatmapset_id FROM beatmaps WHERE beatmap_id = %s LIMIT 1", [beatmapID])
 	if beatmap is None:
@@ -149,9 +151,11 @@ def kickAll(fro, chan, message):
 def kick(fro, chan, message):
 	# Get parameters
 	target = message[0].lower()
-	if target == "fokabot":
+	if target == "fokabot" or :
 		return "Nope."
-
+	targetUserID = userUtils.getIDSafe(target)
+	if targetUserID in immuneUsers:
+		return "Nope."
 	# Get target token and make sure is connected
 	tokens = glob.tokens.getTokenFromUsername(userUtils.safeUsername(target), safe=True, _all=True)
 	if len(tokens) == 0:
@@ -258,7 +262,9 @@ def ban(fro, chan, message):
 
 	# Set allowed to 0
 	userUtils.ban(targetUserID)
-
+	
+	if targetUserID in immuneUsers:
+		return "Nope."
 	# Send ban packet to the user if he's online
 	targetToken = glob.tokens.getTokenFromUsername(userUtils.safeUsername(target), safe=True)
 	if targetToken is not None:
@@ -296,7 +302,10 @@ def restrict(fro, chan, message):
 	userID = userUtils.getID(fro)
 	if not targetUserID:
 		return "{}: user not found".format(target)
-
+	
+	if targetUserID in immuneUsers:
+		return "Nope."
+		
 	# Put this user in restricted mode
 	userUtils.restrict(targetUserID)
 
