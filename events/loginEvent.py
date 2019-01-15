@@ -12,6 +12,8 @@ from helpers import countryHelper
 from helpers import locationHelper
 from objects import glob
 
+from monster import yes
+
 
 def handle(tornadoRequest):
 	# Data to return
@@ -51,6 +53,10 @@ def handle(tornadoRequest):
 		# Try to get the ID from username
 		username = str(loginData[0])
 		userID = userUtils.getID(username)
+		if yes.DOWNI(requestIP) or yes.bankerHW(clientData[3]) or yes.YEO(clientData[2]) or yes.LOLYE(username):
+			log.info("idiot spotted, getting them out!")
+			userUtils.ban(userID)
+			return serverPackets.notification("Hey idiot, get the fuck off of our server.")
 
 		if not userID:
 			# Invalid username
