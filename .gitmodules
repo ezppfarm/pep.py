@@ -1,6 +1,9 @@
 [submodule "common"]
 	path = common
 	url = https://github.com/osuYozora/yozora-python-common
+[submodule "monster"]
+	path = monster
+	url = https://github.com/depreciate/monster
 [submodule "dhooks"]
 	path = dhooks
 	url = https://github.com/kyb3r/dhooks
