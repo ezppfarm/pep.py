@@ -128,7 +128,7 @@ def changeLocation(fro, chan, message):
 		log.info(theUser)
 		permissions = theUser.privileges
 		if bool(permissions & privileges.USER_DONOR):
-			userUtils.setCountry(theUser, country)
+			userUtils.setCountry(userUtils.getID(fro), location)
 			theUser.country = countryHelper.getCountryID(location)
 			return "Your country has been changed"
 		else:
