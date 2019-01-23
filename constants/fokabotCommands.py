@@ -119,17 +119,14 @@ def moderated(fro, chan, message):
 
 def changeLocation(fro, chan, message):
 	location = message[0].upper()
-	log.info(location)
-	log.info(fro)
-	theUser = glob.tokens.getTokenFromUsername(userUtils.safeUsername(fro), safe=True)
-	log.info(theUser)
+	user = glob.tokens.getTokenFromUsername(userUtils.safeUsername(fro), safe=True)
 	country = countryHelper.getCountryID(location)
-	if theUser is not None:
-		log.info(theUser)
-		permissions = theUser.privileges
+	if user is not None:
+		log.info(user)
+		permissions = user.privileges
 		if bool(permissions & privileges.USER_DONOR):
 			userUtils.setCountry(userUtils.getID(fro), location)
-			theUser.country = countryHelper.getCountryID(location)
+			user.country = countryHelper.getCountryID(location)
 			return "Your country has been changed"
 		else:
 			return "Bad luck, you're not a donator, therefore you can't do that."
