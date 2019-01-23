@@ -129,8 +129,8 @@ def changeLocation(fro, chan, message):
 					userUtils.setCountry(userUtils.getID(fro), location)
 					user.country = countryHelper.getCountryID(location)
 					return "Your country has been changed"
-				else:
-			return "This isn't a country code."
+			else:
+				return "This isn't a country code."
 		else:
 			return "Bad luck, you're not a donator, therefore you can't do that."
 
