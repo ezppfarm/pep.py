@@ -74,6 +74,7 @@ if __name__ == "__main__":
 		consoleHelper.printNoNl("> Loading additional config file... ")
 		with open("config.json", "r") as f:
 			glob.conf.extra = json.load(f)
+			glob.botName = glob.conf.extra['botName']
 
 		if glob.conf.default:
 			# We have generated a default config.ini, quit server

@@ -45,7 +45,7 @@ localize = False
 sentry = False
 irc = False
 restarting = False
-botName = "FokaBot"
+botName = None
 
 with open("config.json", "r") as f:
 	JSONConfigFile = json.load(f)
