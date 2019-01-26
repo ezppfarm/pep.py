@@ -29,7 +29,7 @@ class channel:
 			try:
 				fokaToken.joinChannel(self)
 			except exceptions.userAlreadyInChannelException:
-				logging.warning("FokaBot has already joined channel {}".format(self.name))
+				logging.warning("{} has already joined channel {}".format(glob.BOT_NAME, self.name))
 
 	@property
 	def isSpecial(self):

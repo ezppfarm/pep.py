@@ -407,7 +407,7 @@ def kick(fro, chan, message):
 	# Get parameters
 	target = message[0].lower()
 	targetUserID = userUtils.getIDSafe(target)
-	if target == "fokabot" or targetUserID in immuneUsers:
+	if target == glob.BOT_NAME or targetUserID in immuneUsers:
 		return "Nope."
 	
 	
@@ -426,7 +426,7 @@ def kick(fro, chan, message):
 def fokabotReconnect(fro, chan, message):
 	# Check if fokabot is already connected
 	if glob.tokens.getTokenFromUserID(999) is not None:
-		return "Fokabot is already connected to Bancho"
+		return "{} is already connected to Bancho".format(glob.BOT_NAME)
 
 	# Fokabot is not connected, connect it
 	fokabot.connect()
@@ -890,7 +890,7 @@ def tillerinoLast(fro, chan, message):
 		rank = generalUtils.getRank(data["play_mode"], data["mods"], data["accuracy"],
 									data["300_count"], data["100_count"], data["50_count"], data["misses_count"])
 
-		ifPlayer = "{0} | ".format(fro) if chan != "FokaBot" else ""
+		ifPlayer = "{0} | ".format(fro) if chan != glob.BOT_NAME else ""
 		ifFc = " (FC)" if data["max_combo"] == data["fc"] else " {0}x/{1}x".format(data["max_combo"], data["fc"])
 		beatmapLink = "[http://osu.ppy.sh/b/{1} {0}]".format(data["sn"], data["bid"])
 
@@ -1008,7 +1008,7 @@ def report(fro, chan, message):
 		target = chat.fixUsernameForBancho(target)
 
 		# Make sure the target is not foka
-		if target.lower() == "fokabot":
+		if target.lower() == glob.BOT_NAME.lower():
 			raise exceptions.invalidUserException()
 
 		# Make sure the user exists
@@ -1032,10 +1032,10 @@ def report(fro, chan, message):
 		adminMsg = "{user} has reported {target} for {reason} ({info})".format(user=fro, target=target, reason=reason, info=additionalInfo)
 
 		# Log report in #admin and on discord
-		chat.sendMessage("FokaBot", "#admin", adminMsg)
+		chat.sendMessage(glob.BOT_NAME, "#admin", adminMsg)
 		log.warning(adminMsg, discord="cm")
 	except exceptions.invalidUserException:
-		msg = "Hello, FokaBot here! You can't report me. I won't forget what you've tried to do. Watch out."
+		msg = "Hello, {} here! You can't report me. I won't forget what you've tried to do. Watch out.".format(glob.BOT_NAME)
 	except exceptions.invalidArgumentsException:
 		msg = "Invalid report command syntax. To report an user, click on it and select 'Report user'."
 	except exceptions.userNotFoundException:
@@ -1049,7 +1049,7 @@ def report(fro, chan, message):
 			token = glob.tokens.getTokenFromUsername(fro)
 			if token is not None:
 				if token.irc:
-					chat.sendMessage("FokaBot", fro, msg)
+					chat.sendMessage(glob.BOT_NAME, fro, msg)
 				else:
 					token.enqueue(serverPackets.notification(msg))
 	return False
@@ -1161,10 +1161,10 @@ def multiplayer(fro, chan, message):
 			matchID = getMatchIDFromChannel(chan)
 			success = glob.matches.matches[matchID].start()
 			if not success:
-				chat.sendMessage("FokaBot", chan, "Couldn't start match. Make sure there are enough players and "
+				chat.sendMessage(glob.BOT_NAME, chan, "Couldn't start match. Make sure there are enough players and "
 												  "teams are valid. The match has been unlocked.")
 			else:
-				chat.sendMessage("FokaBot", chan, "Have fun!")
+				chat.sendMessage(glob.BOT_NAME, chan, "Have fun!")
 
 
 		def _decreaseTimer(t):
@@ -1172,7 +1172,7 @@ def multiplayer(fro, chan, message):
 				_start()
 			else:
 				if t % 10 == 0 or t <= 5:
-					chat.sendMessage("FokaBot", chan, "Match starts in {} seconds.".format(t))
+					chat.sendMessage(glob.BOT_NAME, chan, "Match starts in {} seconds.".format(t))
 				threading.Timer(1.00, _decreaseTimer, [t - 1]).start()
 
 		if len(message) < 2 or not message[1].isdigit():
@@ -1219,8 +1219,8 @@ def multiplayer(fro, chan, message):
 			raise exceptions.invalidUserException("That user is not connected to bancho right now.")
 		_match = glob.matches.matches[getMatchIDFromChannel(chan)]
 		_match.invite(999, userID)
-		token.enqueue(serverPackets.notification("Please accept the invite you've just received from FokaBot to "
-												 "enter your tourney match."))
+		token.enqueue(serverPackets.notification("Please accept the invite you've just received from {} to "
+												 "enter your tourney match.").format(glob.BOT_NAME))
 		return "An invite to this match has been sent to {}".format(username)
 
 	def mpMap():
@@ -1542,7 +1542,7 @@ def editMap(fro, chan, message): # Edit maps ranking status ingame. // Added by 
 		else:
 			msg = "{} has {}ed beatmap: [https://osu.ppy.sh/s/{} {}]".format(name, rankType, mapID, beatmapData["song_name"])
 
-	chat.sendMessage("FokaBot", "#nowranked", msg)
+	chat.sendMessage(glob.BOT_NAME, "#nowranked", msg)
 	if rankType == "love":
 		if mapType == "set":
 			webhookDescription = "{} (set) has been loved by {}".format(beatmapData["song_name"], name)
@@ -1588,7 +1588,7 @@ commands = [
 		"callback": report
 	}, {
 		"trigger": "!help",
-		"response": "Click (here)[https://ripple.moe/index.php?p=16&id=4] for FokaBot's full command list"
+		"response": "Click (here)[https://ripple.moe/index.php?p=16&id=4] for {}'s full command list".format(glob.BOT_NAME)
 	},
 	 #{
 		#"trigger": "!ask",

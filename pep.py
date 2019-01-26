@@ -170,7 +170,7 @@ if __name__ == "__main__":
 			raise
 
 		# Start fokabot
-		consoleHelper.printNoNl("> Connecting FokaBot... ")
+		consoleHelper.printNoNl("> Connecting the bot... ")
 		fokabot.connect()
 		consoleHelper.printDone()
 

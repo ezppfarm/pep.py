@@ -391,7 +391,7 @@ class token:
 
 		:param seconds: silence length in seconds. If None, get it from db. Default: None
 		:param reason: silence reason. Default: empty string
-		:param author: userID of who has silenced the user. Default: 999 (FokaBot)
+		:param author: userID of who has silenced the user. Default: 999 (zxzxz)
 		:return:
 		"""
 		if seconds is None:
@@ -501,16 +501,16 @@ class token:
 		:return:
 		"""
 		self.restricted = True
-		chat.sendMessage("FokaBot", self.username, "Your account is currently in restricted mode. Please visit Yozora's website for more information.")
+		chat.sendMessage(glob.BOT_NAME, self.username, "Your account is currently in restricted mode. Please visit Yozora's website for more information.")
 
 	def resetRestricted(self):
 		"""
-		Send FokaBot message to alert the user that he has been unrestricted
+		Send z message to alert the user that he has been unrestricted
 		and he has to log in again.
 
 		:return:
 		"""
-		chat.sendMessage("FokaBot", self.username, "Your account has been unrestricted! Please log in again.")
+		chat.sendMessage(glob.BOT_NAME, self.username, "Your account has been unrestricted! Please log in again.")
 
 	def joinStream(self, name):
 		"""

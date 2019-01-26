@@ -188,7 +188,7 @@ class tokenList:
 			timedOutTokens = []		# timed out users
 			timeoutLimit = int(time.time()) - 100
 			for key, value in self.tokens.items():
-				# Check timeout (fokabot is ignored)
+				# Check timeout (bot is ignored)
 				if value.pingTime < timeoutLimit and value.userID != 999 and not value.irc and not value.tournament:
 					# That user has timed out, add to disconnected tokens
 					# We can't delete it while iterating or items() throws an error

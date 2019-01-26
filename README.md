@@ -9,7 +9,7 @@ This is Yozora's bancho server. It handles:
 - Public and private chat
 - Spectator
 - Multiplayer
-- Fokabot
+- The bot
 
 ## Requirements
 - Python 3.5

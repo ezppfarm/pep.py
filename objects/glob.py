@@ -8,6 +8,7 @@ from objects import matchList
 from objects import streamList
 from objects import tokenList
 from common.web import schiavo
+import json
 
 try:
 	with open("version") as f:
@@ -44,6 +45,13 @@ localize = False
 sentry = False
 irc = False
 restarting = False
+with open("config.json" as f):
+	JSONConfigFile = json.load(f)
+	if JSONConfigFile['bot_name'] != '':
+		BOT_NAME = JSONConfigFile['bot_name']
+	else:
+		BOT_NAME = "FokaBot"
+
 
 startTime = int(time.time())
 

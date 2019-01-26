@@ -29,7 +29,7 @@ def handle(userToken, packetData):
 		# Some dank memes easter egg
 		memeTitles = [
 			"RWC 2020",
-			"Fokabot is a duck",
+			"Ripple is a duck",
 			"Dank memes",
 			"1337ms Ping",
 			"Iscriviti a Xenotoze",
