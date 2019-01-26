@@ -47,14 +47,6 @@ irc = False
 restarting = False
 botName = None
 
-with open("config.json", "r") as f:
-	JSONConfigFile = json.load(f)
-	if JSONConfigFile['botName'] != '':
-		botName = JSONConfigFile['botName']
-	else:
-		botName = "FokaBot"
-
-
 startTime = int(time.time())
 
 streams = streamList.streamList()
