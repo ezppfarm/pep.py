@@ -45,7 +45,7 @@ localize = False
 sentry = False
 irc = False
 restarting = False
-with open("config.json" as f):
+with open("config.json", "r") as f:
 	JSONConfigFile = json.load(f)
 	if JSONConfigFile['bot_name'] != '':
 		BOT_NAME = JSONConfigFile['bot_name']
