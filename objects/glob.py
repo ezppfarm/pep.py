@@ -45,13 +45,14 @@ localize = False
 sentry = False
 irc = False
 restarting = False
-BOT_NAME = "FokaBot"
+botName = "FokaBot"
+
 with open("config.json", "r") as f:
 	JSONConfigFile = json.load(f)
-	if JSONConfigFile['bot_name'] != '':
-		BOT_NAME = JSONConfigFile['bot_name']
+	if JSONConfigFile['botName'] != '':
+		botName = JSONConfigFile['botName']
 	else:
-		BOT_NAME = "FokaBot"
+		botName = "FokaBot"
 
 
 startTime = int(time.time())
