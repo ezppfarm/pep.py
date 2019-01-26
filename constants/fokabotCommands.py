@@ -1588,7 +1588,7 @@ commands = [
 		"callback": report
 	}, {
 		"trigger": "!help",
-		"response": "Click (here)[https://ripple.moe/index.php?p=16&id=4] for {}'s full command list".format(glob.botName)
+		"response": "Click (here)[https://ripple.moe/index.php?p=16&id=4] for the bot's full command list"
 	},
 	 #{
 		#"trigger": "!ask",
