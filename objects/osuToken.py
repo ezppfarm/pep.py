@@ -455,20 +455,28 @@ class token:
 		if stats is None:
 			log.warning("Stats query returned None")
 			return
-		self.rankedScore = stats["rankedScore"]
-		self.accuracy = stats["accuracy"]/100
-		self.playcount = stats["playcount"]
-		self.totalScore = stats["totalScore"]
 		if self.relaxing == True:
 			self.gameRank = stats_relax["gameRank"]
 			self.pp = stats_relax["pp"]
+			self.rankedScore = stats_relax["rankedScore"]
+			self.accuracy = stats_relax["accuracy"]/100
+			self.playcount = stats_relax["playcount"]
+			self.totalScore = stats_relax["totalScore"]
 		elif self.autobotting == True:
 			self.gameRank = stats_auto["gameRank"]
 			self.pp = stats_auto["pp"]
+			self.rankedScore = stats_auto["rankedScore"]
+			self.accuracy = stats_auto["accuracy"]/100
+			self.playcount = stats_auto["playcount"]
+			self.totalScore = stats_auto["totalScore"]
 		else:
 			self.gameRank = stats["gameRank"]
 			self.pp = stats["pp"]
-
+			self.rankedScore = stats["rankedScore"]
+			self.accuracy = stats["accuracy"]/100
+			self.playcount = stats["playcount"]
+			self.totalScore = stats["totalScore"]
+			
 	def checkRestricted(self):
 		"""
 		Check if this token is restricted. If so, send fokabot message
