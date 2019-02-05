@@ -452,20 +452,29 @@ class token:
 		stats_relax = userUtils.getUserStatsRx(self.userID, self.gameMode)
 		stats_auto = userUtils.getUserStatsAp(self.userID, self.gameMode)
 		log.debug(str(stats))
+		max_pp = 32000
+		
 		if stats is None:
 			log.warning("Stats query returned None")
 			return
 		if self.relaxing == True:
 			self.gameRank = stats_relax["gameRank"]
 			self.pp = stats_relax["pp"]
-			self.rankedScore = stats_relax["rankedScore"]
+			if self.pp != max_pp:
+				self.rankedScore = stats_relax["rankedScore"]
+			else: 
+				self.rankedScore = stats_relax["pp"]
 			self.accuracy = stats_relax["accuracy"]/100
 			self.playcount = stats_relax["playcount"]
 			self.totalScore = stats_relax["totalScore"]
 		elif self.autobotting == True:
 			self.gameRank = stats_auto["gameRank"]
 			self.pp = stats_auto["pp"]
-			self.rankedScore = stats_auto["rankedScore"]
+			if self.pp != max_pp:
+				self.rankedScore = stats_auto["rankedScore"]
+			else: 
+				self.rankedScore = stats_auto["pp"]
+			
 			self.accuracy = stats_auto["accuracy"]/100
 			self.playcount = stats_auto["playcount"]
 			self.totalScore = stats_auto["totalScore"]
