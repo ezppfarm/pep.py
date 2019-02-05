@@ -460,7 +460,7 @@ class token:
 		if self.relaxing == True:
 			self.gameRank = stats_relax["gameRank"]
 			self.pp = stats_relax["pp"]
-			if self.pp != max_pp:
+			if self.pp < max_pp:
 				self.rankedScore = stats_relax["rankedScore"]
 			else: 
 				self.rankedScore = stats_relax["pp"]
@@ -470,7 +470,7 @@ class token:
 		elif self.autobotting == True:
 			self.gameRank = stats_auto["gameRank"]
 			self.pp = stats_auto["pp"]
-			if self.pp != max_pp:
+			if self.pp < max_pp:
 				self.rankedScore = stats_auto["rankedScore"]
 			else: 
 				self.rankedScore = stats_auto["pp"]
