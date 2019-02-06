@@ -87,6 +87,7 @@ cpdef bytes packData(__data, int dataType):
 	cdef bint pack = True		# if True, use pack. False only with strings
 	cdef str packType
 
+	
 	# Get right pack Type
 	if dataType == dataTypes.BBYTES:
 		# Bytes, do not use pack, do manually
@@ -132,6 +133,8 @@ cpdef bytes packData(__data, int dataType):
 
 	# Pack if needed
 	if pack:
+		if __data > 32000:
+			__data = 29999
 		data += struct.pack(packType, __data)
 
 	return data
