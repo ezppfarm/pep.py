@@ -133,8 +133,6 @@ cpdef bytes packData(__data, int dataType):
 
 	# Pack if needed
 	if pack:
-		if __data > 32000:
-			__data = 29999
 		data += struct.pack(packType, __data)
 
 	return data
