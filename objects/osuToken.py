@@ -466,7 +466,7 @@ class token:
 		elif self.autobotting == True:
 			self.gameRank = stats_auto["gameRank"]
 			self.pp = stats_auto["pp"]
-			self.rankedScore = stats_auto["rankedScore"
+			self.rankedScore = stats_auto["rankedScore"]
 			self.accuracy = stats_auto["accuracy"]/100
 			self.playcount = stats_auto["playcount"]
 			self.totalScore = stats_auto["totalScore"]
