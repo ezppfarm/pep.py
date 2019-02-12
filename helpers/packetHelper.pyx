@@ -1,6 +1,6 @@
 import struct
-from constants import dataTypes
 from common.log import logUtils as log
+from constants import dataTypes
 
 cpdef bytearray uleb128Encode(int num):
 	"""
