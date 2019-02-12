@@ -1,5 +1,4 @@
 import struct
-from common.log import logUtils as log
 from constants import dataTypes
 
 cpdef bytearray uleb128Encode(int num):
@@ -136,7 +135,6 @@ cpdef bytes packData(__data, int dataType):
 	if pack:
 		data += struct.pack(packType, __data)
 
-	log.info(data)
 	return data
 
 cpdef bytes buildPacket(int __packet, list __packetData = None):
@@ -158,7 +156,6 @@ cpdef bytes buildPacket(int __packet, list __packetData = None):
 	# Pack packet data
 	cdef list i
 	for i in __packetData:
-		log.info(i)
 		packetData += packData(i[0], i[1])
 
 	# Set packet length
