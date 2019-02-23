@@ -123,7 +123,10 @@ def userStats(userID, force = False):
 	userToken = glob.tokens.getTokenFromUserID(userID)
 	if userToken is None or ((userToken.restricted or userToken.irc or userToken.tournament) and not force):
 		return bytes()
-
+	pp = userToken.pp
+	if pp > 65535:
+		pp = 0
+		
 	return packetHelper.buildPacket(packetIDs.server_userStats,
 	[
 		[userID, dataTypes.UINT32],
@@ -138,7 +141,7 @@ def userStats(userID, force = False):
 		[userToken.playcount, dataTypes.UINT32],
 		[userToken.totalScore, dataTypes.UINT64],
 		[userToken.gameRank, dataTypes.UINT32],
-		[userToken.pp if 65535 >= userToken.pp > 0 else 0, dataTypes.UINT64]
+		[pp , dataTypes.UINT16]
 	])
 
 
