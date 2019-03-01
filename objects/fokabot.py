@@ -6,6 +6,7 @@ from common.constants import actions
 from common.ripple import userUtils
 from constants import fokabotCommands
 from constants import serverPackets
+from helpers import countryHelper
 from objects import glob
 
 # Tillerino np regex, compiled only once to increase performance
@@ -19,6 +20,7 @@ def connect():
 	"""
 	token = glob.tokens.addToken(999)
 	token.actionID = actions.IDLE
+	token.country = countryHelper.getCountryID(136)
 	glob.streams.broadcast("main", serverPackets.userPanel(999))
 	glob.streams.broadcast("main", serverPackets.userStats(999))
 
