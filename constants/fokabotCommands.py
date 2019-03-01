@@ -22,6 +22,7 @@ from common.web import cheesegull
 from helpers import countryHelper
 from helpers import consoleHelper
 from helpers import webhookHelper
+from common.constants import actions
 
 immuneUsers = [1000, 1193]
 
@@ -395,9 +396,12 @@ def changeLocationBOT(fro, chan, message):
 	if user is not None:
 		log.info(user)
 		permissions = user.privileges
+		
 		if location in countryCodes:
 				userUtils.setCountry(999, location)
 				user.country = countryHelper.getCountryID(location)
+				
+				user.actionID = actions.IDLE
 				return "Your country has been changed"
 		else:
 			return "This isn't a country code."	
