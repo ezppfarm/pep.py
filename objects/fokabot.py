@@ -20,7 +20,7 @@ def connect():
 	"""
 	token = glob.tokens.addToken(999)
 	token.actionID = actions.IDLE
-	text = "\nYozora made with love by\nAlicia & Sarah "
+	text = "\nYozora made with love by Alicia & Sarah "
 	token.actionText = text
 	token.country = 227
 	glob.streams.broadcast("main", serverPackets.userPanel(999))
