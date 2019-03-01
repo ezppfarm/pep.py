@@ -19,8 +19,8 @@ def connect():
 	:return:
 	"""
 	token = glob.tokens.addToken(999)
-	token.actionID = actions.IDLE
-	text = "    Yozora made with love by\nAlicia & Sarah "
+	token.actionID = actions.NONE
+	text = "Yozora made with love by\nAlicia & Sarah "
 	token.actionText = text
 	token.country = 227
 	glob.streams.broadcast("main", serverPackets.userPanel(999))
