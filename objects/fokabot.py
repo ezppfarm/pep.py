@@ -20,7 +20,9 @@ def connect():
 	"""
 	token = glob.tokens.addToken(999)
 	token.actionID = actions.IDLE
-	token.country = 136
+	text = " <3"
+	token.actionText = text
+	token.country = 227
 	glob.streams.broadcast("main", serverPackets.userPanel(999))
 	glob.streams.broadcast("main", serverPackets.userStats(999))
 
