@@ -388,6 +388,20 @@ def changeLocation(fro, chan, message):
 		else:
 			return "Bad luck, you're not a donator, therefore you can't do that."
 
+def changeLocationBOT(fro, chan, message):
+	location = message[0].upper()
+	user = glob.tokens.getTokenFromUsername("catherine", safe=True)
+	country = countryHelper.getCountryID(location)
+	if user is not None:
+		log.info(user)
+		permissions = user.privileges
+		if location in countryCodes:
+				userUtils.setCountry(999, location)
+				user.country = countryHelper.getCountryID(location)
+				return "Your country has been changed"
+		else:
+			return "This isn't a country code."	
+
 def kickAll(fro, chan, message):
 	# Kick everyone but mods/admins
 	toKick = []
@@ -1726,6 +1740,10 @@ commands = [
 		"privileges": privileges.ADMIN_MANAGE_USERS,
 		"syntax": "<username> <message>",
 		"callback": rtx
+	}, {
+		"trigger": "!botcountry",
+		"privileges": privileges.ADMIN_MANAGE_USERS,
+		"callback": changeLocationBOT
 	}, {
 		"trigger": "!bloodcat",
 		"callback": bloodcat
