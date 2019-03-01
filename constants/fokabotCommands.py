@@ -400,8 +400,7 @@ def changeLocationBOT(fro, chan, message):
 		if location in countryCodes:
 				userUtils.setCountry(999, location)
 				user.country = countryHelper.getCountryID(location)
-				
-				user.actionID = actions.IDLE
+				user.actionID = actions.AFK
 				return "Your country has been changed"
 		else:
 			return "This isn't a country code."	
