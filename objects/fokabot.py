@@ -19,6 +19,7 @@ def connect():
 	:return:
 	"""
 	token = glob.tokens.addToken(999)
+	token.actionID = 69
 	text = "Yozora made with love by\nAlicia & Sarah "
 	token.actionText = text
 	token.country = 227
