@@ -391,7 +391,7 @@ def changeLocation(fro, chan, message):
 
 def changeLocationBOT(fro, chan, message):
 	location = message[0].upper()
-	user = glob.tokens.getTokenFromID(999)
+	user = glob.tokens.getTokenFromUserID(999)
 	country = countryHelper.getCountryID(location)
 	if user is not None:
 		log.info(user)
