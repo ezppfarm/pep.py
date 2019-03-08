@@ -598,14 +598,14 @@ def kill(fro, chan, message):
 	if not targetUserID:
 		return "{}: user not found".format(target)
 
-	targetToken = glob.tokens.getTokenFromUserId(userID)
+	targetToken = glob.tokens.getTokenFromUsername(userUtils.safeUsername(target), safe=True)
 
 	targetToken.enqueue(userSupporterGMT(True, False, False))
 	targetToken.enqueue(userSupporterGMT(False, True, False))
 	targetToken.enqueue(serverPackets.kill(target))
 
 	return "{} has been killed".format(target)
-	
+
 def unrestrict(fro, chan, message):
 	# Get parameters
 	for i in message:
