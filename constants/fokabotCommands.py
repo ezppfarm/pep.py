@@ -588,6 +588,24 @@ def restrict(fro, chan, message):
 	log.rap(userID, "has put {} in restricted mode".format(target), True)
 	return "Bye bye {}. See you later, maybe.".format(target)
 
+def kill(fro, chan, message):
+	for i in message:
+		i = i.lower()
+	target = message[0]
+
+	targetUserID = userUtils.getIDSafe(target)
+	userID = userUtils.getID(fro)
+	if not targetUserID:
+		return "{}: user not found".format(target)
+
+	targetToken = glob.tokens.getTokenFromUserId(userID)
+
+	targetToken.enqueue(userSupporterGMT(True, False, False))
+	targetToken.enqueue(userSupporterGMT(False, True, False))
+	targetToken.enqueue(serverPackets.kill(target))
+
+	return "{} has been killed".format(target)
+	
 def unrestrict(fro, chan, message):
 	# Get parameters
 	for i in message:
@@ -1750,12 +1768,12 @@ commands = [
 	}, {
 		"trigger": "!bloodcat",
 		"callback": bloodcat
+	}, {
+		"trigger": "!kill",
+		"privileges": privileges.ADMIN_MANAGE_USERS,
+		"syntax": "<username>",
+		"callback": kill
 	}
-	#
-	#	"trigger": "!acc",
-	#	"callback": tillerinoAcc,
-	#	"syntax": "<accuarcy>"
-	#}
 ]
 
 # Commands list default values
