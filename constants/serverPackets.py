@@ -78,7 +78,7 @@ def userLogout(userID):
 	return packetHelper.buildPacket(packetIDs.server_userLogout, [[userID, dataTypes.SINT32], [0, dataTypes.BYTE]])
 
 def kill(userID):
-	return packetHelper.buildPacket(packetIDs.server_ping, [[dataTypes.BYTE]])
+	return packetHelper.buildPacket(packetIDs.client_banchoPing, [[dataTypes.BYTE]])
 
 def userPanel(userID, force = False):
 	# Connected and restricted check
