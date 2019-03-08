@@ -3,6 +3,7 @@ client_changeAction = 0
 client_sendPublicMessage = 1
 client_logout = 2
 client_requestStatusUpdate = 3
+client_banchoPing = 4
 server_userID = 5
 server_sendMessage = 7
 server_ping = 8
